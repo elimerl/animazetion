@@ -12,7 +12,7 @@
   <div id="app">
 
     <canvas id="canvas" style="background-color: white;"></canvas>
-    <div class="sidebar">
+    <div class="sidebar" style="max-width: 100%;">
       <h1>What am I looking at?</h1>
       <p>An animation of the Recursive
         Backtracker algorithm for generating mazes.</p>
@@ -36,7 +36,7 @@
 
       <h1>How do I tell the computer to do it?</h1>
       <p>You can paste this into your browser's console and it will print out a maze.</p>
-      <pre><code>// An enum of directions. These numbers are in binary
+      <pre style="overflow-x: scroll;"><code>// An enum of directions. These numbers are in binary
 // to be a bitfield. The first (rightmost) bit is North,
 // then the second bit is East, and so on. By ORing (||)
 // these together, a cell can contain any combination of
@@ -48,7 +48,7 @@ const Directions = {
     West: 0b1000,
 };
 
-// A map from a direction to the opposite.
+// A map from a direction to its opposite.
 const OPPOSITE = {
     [Directions.North]: Directions.South,
     [Directions.South]: Directions.North,

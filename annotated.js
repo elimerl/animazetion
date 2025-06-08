@@ -10,7 +10,7 @@ const Directions = {
     West: 0b1000,
 };
 
-// A map from a direction to the opposite.
+// A map from a direction to its opposite.
 const OPPOSITE = {
     [Directions.North]: Directions.South,
     [Directions.South]: Directions.North,
