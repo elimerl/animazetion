@@ -1,42 +1,4 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + TS</title>
-</head>
-
-<body>
-  <div id="app">
-
-    <canvas id="canvas" style="background-color: white;"></canvas>
-    <div class="sidebar">
-      <h1>What am I looking at?</h1>
-      <p>An animation of the Recursive
-        Backtracker algorithm for generating mazes.</p>
-
-      <h1>Can I see a really big maze?</h1>
-      <button id="REALLY-BIG">yes</button>
-
-      <h1>How does it work?</h1>
-      <p><a href="https://weblog.jamisbuck.org/2010/12/27/maze-generation-recursive-backtracking">This article</a>
-        explains it well. Here's an excerpt, the "mile-high view" of the algorithm:
-      <blockquote>
-        <ol>
-          <li>Choose a starting point in the field.</li>
-          <li>Randomly choose a wall at that point and carve a passage through to the adjacent cell, but only if the
-            adjacent cell has not been visited yet. This becomes the new current cell.</li>
-          <li>If all adjacent cells have been visited, back up to the last cell that has uncarved walls and repeat.</li>
-        </ol>
-        The algorithm ends when the process has backed all the way up to the starting point.
-      </blockquote>
-      </p>
-
-      <h1>How do I tell the computer to do it?</h1>
-      <p>You can paste this into your browser's console and it will print out a maze.</p>
-      <pre><code>// An enum of directions. These numbers are in binary
+// An enum of directions. These numbers are in binary
 // to be a bitfield. The first (rightmost) bit is North,
 // then the second bit is East, and so on. By ORing (||)
 // these together, a cell can contain any combination of
@@ -109,7 +71,7 @@ class MazeRecursiveBacktracker {
     }
 
     step() {
-        if (this.stack.length &gt; 0) {
+        if (this.stack.length > 0) {
             // This does not pop the item off the stack.
             const [x, y] = this.stack[this.stack.length - 1];
 
@@ -125,17 +87,17 @@ class MazeRecursiveBacktracker {
                 const ny = y + DY[dir];
 
                 if (
-                    nx &gt;= 0 &amp;&amp;
-                    nx &lt; this.maze.width &amp;&amp;
-                    ny &gt;= 0 &amp;&amp;
-                    ny &lt; this.maze.height &amp;&amp;
+                    nx >= 0 &&
+                    nx < this.maze.width &&
+                    ny >= 0 &&
+                    ny < this.maze.height &&
                     this.maze.getCell(nx, ny) === 0 // If the cell has no connections, it is 0
                 ) {
                     neighbors.push([nx, ny, dir]);
                 }
             }
 
-            if (neighbors.length &gt; 0) {
+            if (neighbors.length > 0) {
                 const [nextX, nextY, direction] =
                     neighbors[Math.floor(Math.random() * neighbors.length)];
 
@@ -156,41 +118,28 @@ while (!backtracker.isDone()) {
 }
 
 // print the maze as ascii
-let lines = [&quot;#&quot;.repeat(maze.width * 2 + 2)];
-for (let y = 0; y &lt; maze.height; y++) {
-    let line = &quot;#&quot;;
-    for (let x = 0; x &lt; maze.width; x++) {
-        line += &quot; &quot;;
-        if ((maze.getCell(x, y) &amp; Directions.East) === 0) {
-            line += &quot;#&quot;;
+let lines = ["#".repeat(maze.width * 2 + 2)];
+for (let y = 0; y < maze.height; y++) {
+    let line = "#";
+    for (let x = 0; x < maze.width; x++) {
+        line += " ";
+        if ((maze.getCell(x, y) & Directions.East) === 0) {
+            line += "#";
         } else {
-            line += &quot; &quot;;
+            line += " ";
         }
     }
     lines.push(line);
-    line = &quot;#&quot;;
-    for (let x = 0; x &lt; maze.width; x++) {
-        if ((maze.getCell(x, y) &amp; Directions.South) === 0) {
-            line += &quot;#&quot;;
+    line = "#";
+    for (let x = 0; x < maze.width; x++) {
+        if ((maze.getCell(x, y) & Directions.South) === 0) {
+            line += "#";
         } else {
-            line += &quot; &quot;;
+            line += " ";
         }
-        line += &quot;#&quot;;
+        line += "#";
     }
     lines.push(line);
 }
 
-console.log(lines.join(&quot;\n&quot;));
-</code></pre>
-      </p>
-      <p xmlns:cc="http://creativecommons.org/ns#">This website is
-        marked by Eli Davies with <a href="https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1"
-          target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC0 1.0</a>, releasing it into
-        the public
-        domain.</p>
-    </div>
-  </div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
-</html>
+console.log(lines.join("\n"));

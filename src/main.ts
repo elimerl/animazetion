@@ -96,8 +96,14 @@ function finish() {
     finishing = true;
 
     setTimeout(() => {
-        const newHeight = Math.floor(Math.random() * 30) + 10;
-        const newWidth = Math.floor(newHeight * (0.5 + Math.random()));
+        let newHeight = Math.round(maze.height * 1.5);
+        let newWidth = Math.round(maze.width * 1.5);
+        if (newHeight > 50) {
+            newHeight = 50;
+        }
+        if (newWidth > 40) {
+            newWidth = 40;
+        }
         const newMaze = new Maze(newWidth, newHeight);
         // for (let x = 0; x < maze.width; x++) {
         //     for (let y = 0; y < maze.height; y++) {
@@ -108,24 +114,18 @@ function finish() {
         maze = newMaze;
         rback = new MazeRecursiveBacktracker(
             maze,
-            Math.floor(Math.random() * maze.width),
-            Math.floor(Math.random() * maze.height)
+            maze.width - 1,
+            maze.height - 1
         );
-        stepDt = 0.4 / maze.height;
+        stepDt = 0.5 / maze.height;
         finishing = false;
-    }, 1000);
+    }, 3000);
 }
 
 requestAnimationFrame(frame);
 
 document.getElementById("REALLY-BIG")!.onclick = () => {
-    // for (let x = 0; x < maze.width; x++) {
-    //     for (let y = 0; y < maze.height; y++) {
-    //         newMaze.cells[y * newWidth + x] =
-    //             maze.cells[y * maze.width + x];
-    //     }
-    // }
-    maze = new Maze(100, 100);
+    maze = new Maze(80, 80);
     rback = new MazeRecursiveBacktracker(
         maze,
         Math.floor(Math.random() * maze.width),
